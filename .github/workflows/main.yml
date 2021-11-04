@@ -39,7 +39,7 @@ jobs:
           emaint sync -r azimut
 
       - name: 'Install Packages'
-        run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image dev-lisp/sbcl-2.1.10::azimut
+        run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image =dev-lisp/sbcl-2.1.10::azimut
 
       - name: 'Tar /var/cache/binpkgs'
         run: tar cvf binpkgs.tar /var/cache/binpkgs
