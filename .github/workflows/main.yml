@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: gentoo/stage3:nomultilib-20200906
+      image: gentoo/stage3:nomultilib
     steps:
 
       - name: 'Sync Portage'
