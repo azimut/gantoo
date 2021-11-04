@@ -5,7 +5,7 @@ ENV FEATURES='nodoc noinfo noman -ipc-sandbox -network-sandbox -pid-sandbox'
 ENV USE='static-libs'
 
 RUN --mount=type=cache,target=/var/db/repos/gentoo \
-    --mount=type=cache,target=/var/cache/binpkgs \
+    --mount=type=bind,source=/tmp/binpkgs,target=/var/cache/binpkgs,rw \
     emerge-webrsync && \
     emerge -bk app-portage/flaggie app-portage/gentoolkit app-portage/eix && \
     eix-update && \
