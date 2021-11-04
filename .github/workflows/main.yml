@@ -4,14 +4,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: gentoo/stage3:nomultilib
+      image: gentoo/stage3:nomultilib-20200906
     steps:
-      - uses: actions/checkout@v2
-      - run: emerge-webrsync
-      - run: ls /NOEXISTE
-      - name: DEBUG SHELL
-        uses: seemethere/action-tmate@skip_dependency_installation
+
+      - name: 'Sync Portage'
+        run: emerge-webrsync
+      - name: 'Download binpkgs'
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+      - name: 'Unpack binpkgs'
+        run: test -f binpkgs.tar && tar xvf binpkgs.tar -C / || true
+
+      - name: 'Setup Build'
+        run: |
+          emerge -qbk app-portage/flaggie
+          flaggie --strict --destructive-cleanup +static-libs
+          flaggie --strict --destructive-cleanup media-gfx/imagemagick:0/6.9.11-60 -openmp -cxx -bzip2 -zlib
+      - name: 'Install Packages'
+        run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60
+
+      - name: 'Tar /var/cache/binpkgs'
+        run: tar cvf binpkgs.tar /var/cache/binpkgs
+      - name: 'Upload binpkgs.tar'
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: binpkgs.tar
+
+      - name: 'DEBUG tools'
         if: ${{ failure() }}
+        run: |
+          emerge -qbk app-portage/gentoolkit app-portage/eix
+          eix-update
+      - name: 'DEBUG shell'
+        if: ${{ failure() }}
+        uses: seemethere/action-tmate@skip_dependency_installation
         with:
           install_dependencies: false
           sudo: false
