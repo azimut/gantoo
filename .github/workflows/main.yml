@@ -26,20 +26,20 @@ jobs:
           emerge -qbk app-portage/flaggie
           flaggie --strict --destructive-cleanup dev-vcs/git -perl
           flaggie --strict --destructive-cleanup +static-libs
-          # flaggie --strict --destructive-cleanup dev-lisp/sbcl +~amd64
-          # flaggie --strict --destructive-cleanup dev-lisp/asdf +~amd64
-          # flaggie --strict --destructive-cleanup dev-lisp/uiop +~amd64
+          flaggie --strict --destructive-cleanup dev-lisp/sbcl +~amd64
+          flaggie --strict --destructive-cleanup dev-lisp/asdf +~amd64
+          flaggie --strict --destructive-cleanup dev-lisp/uiop +~amd64
           flaggie --strict --destructive-cleanup media-gfx/imagemagick:0/6.9.11-60 -openmp -cxx -bzip2 -zlib
           flaggie --strict --destructive-cleanup media-libs/sdl2-image +png
       - name: 'Add Overlay'
         run: |
           emerge -qbk app-admin/eselect app-eselect/eselect-repository dev-vcs/git
           mkdir -vp /etc/portage/repos.conf
-          # eselect repository add azimut git https://github.com/azimut/overlay.git
-          # emaint sync -r azimut
+          eselect repository add azimut git https://github.com/azimut/overlay.git
+          emaint sync -r azimut
 
       - name: 'Install Packages'
-        run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image #=dev-lisp/sbcl-2.1.10::azimut
+        run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image =dev-lisp/sbcl-2.1.10::azimut
 
       - name: 'DEBUG tools'
         if: ${{ failure() }}
