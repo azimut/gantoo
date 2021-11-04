@@ -24,7 +24,7 @@ jobs:
           flaggie --strict --destructive-cleanup media-gfx/imagemagick:0/6.9.11-60 -openmp -cxx -bzip2 -zlib
           flaggie --strict --destructive-cleanup media-libs/sdl2-image +png
       - name: 'Install Packages'
-        run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-ttf media-libs/sdl2-image
+        run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image
 
       - name: 'Tar /var/cache/binpkgs'
         run: tar cvf binpkgs.tar /var/cache/binpkgs
