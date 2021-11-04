@@ -1,0 +1,18 @@
+name: Linux Build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: gentoo/stage3:nomultilib
+    steps:
+      - uses: actions/checkout@v2
+      - run: emerge-webrsync
+      - run: ls /NOEXISTE
+      - name: DEBUG SHELL
+        uses: seemethere/action-tmate@skip_dependency_installation
+        if: ${{ failure() }}
+        with:
+          install_dependencies: false
+          sudo: false
+
