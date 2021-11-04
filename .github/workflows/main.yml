@@ -19,7 +19,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: azimut/gantoo:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gantoo:latest
 
       # - name: 'Tar /var/cache/binpkgs'
       #   run: tar cvf binpkgs.tar cached
