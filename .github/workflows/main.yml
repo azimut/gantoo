@@ -14,7 +14,7 @@ jobs:
       - name: 'Unpack binpkgs'
         run: |
           test -f binpkgs.tar && tar xvf binpkgs.tar -C / || true
-          mkdir -vp /bin/pkgs
+          mkdir -vp /tmp/binpkgs
 
       -
         name: Set up Docker Buildx
