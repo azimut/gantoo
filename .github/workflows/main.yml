@@ -19,17 +19,17 @@ jobs:
 
       - name: 'Sync Portage'
         run: emerge-webrsync
-      - name: 'Add Overlay'
-        run: |
-          emerge -qbk app-admin/eselect app-eselect/eselect-repository
-          eselect repository add azimut git https://github.com/azimut/overlay.git
-          emaint sync -r azimut
       - name: 'Configure USE'
         run: |
           emerge -qbk app-portage/flaggie
           flaggie --strict --destructive-cleanup +static-libs
           flaggie --strict --destructive-cleanup media-gfx/imagemagick:0/6.9.11-60 -openmp -cxx -bzip2 -zlib
           flaggie --strict --destructive-cleanup media-libs/sdl2-image +png
+      - name: 'Add Overlay'
+        run: |
+          emerge -qbk app-admin/eselect app-eselect/eselect-repository
+          eselect repository add azimut git https://github.com/azimut/overlay.git
+          emaint sync -r azimut
 
       - name: 'Install Packages'
         run: emerge -qbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image dev-lisp/sbcl-2.1.10::azimut
