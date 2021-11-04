@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.3
-FROM gentoo/stage3:nomultilib
+FROM gentoo/stage3:nomultilib-20211104
 
 ENV FEATURES='nodoc noinfo noman -ipc-sandbox -network-sandbox -pid-sandbox'
 ENV USE='static-libs'
