@@ -13,8 +13,8 @@ jobs:
           workflow_conclusion: success
       - name: 'Unpack binpkgs'
         run: |
-          test -f binpkgs.tar && tar xvf binpkgs.tar -C / || true
-          mkdir -vp /tmp/binpkgs
+          test -f binpkgs.tar && tar xvf binpkgs.tar || true
+          mkdir -vp cached
 
       -
         name: Set up Docker Buildx
@@ -35,7 +35,7 @@ jobs:
           tags: azimut/gantoo:latest
 
       - name: 'Tar /var/cache/binpkgs'
-        run: tar cvf binpkgs.tar /tmp/binpkgs
+        run: tar cvf binpkgs.tar cached
       - name: 'Upload binpkgs.tar'
         uses: actions/upload-artifact@v2
         with:
