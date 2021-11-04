@@ -11,6 +11,7 @@ jobs:
         run: emerge-webrsync
       - name: 'Download binpkgs'
         uses: actions/download-artifact@v2
+        continue-on-error: true
         with:
           name: my-artifact
       - name: 'Unpack binpkgs'
