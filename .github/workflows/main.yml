@@ -34,8 +34,11 @@ jobs:
 
       - name: Extract Build Cache
         run: |
-          docker cp $(docker ps -qa):/var/cache/binpkgs   .
-          tar cf binpkgs.tar   binpkgs/
+          CONTAINER=$(docker ps -qa)
+          docker exec $CONTAINER /bin/sh -c 'echo /var/lib/buildkit/runc-overlayfs/snapshots/snapshots/*/fs/var/cache/binpkgs/' \
+            | xargs -n1 echo \
+            | while read -r file; do docker cp "$CONTAINER":"${file}" .; done
+          tar cf binpkgs.tar binpkgs/
       - uses: actions/upload-artifact@v2
         with:
           name: binary-cache
