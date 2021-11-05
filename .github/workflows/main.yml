@@ -9,11 +9,13 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         continue-on-error: true
         with:
+          path: /tmp
           name: binary-cache
           workflow: main.yml
           workflow_conclusion: success
       - name: Fake .tar, if necessary
         run: |
+          cd /tmp
           mkdir -p distfiles binpkgs
           test -f distfiles.tar || tar -cf distfiles.tar distfiles
           test -f binpkgs.tar   || tar -cf binpkgs.tar   binpkgs
@@ -35,6 +37,7 @@ jobs:
 
       - name: Extract Build Cache
         run: |
+          cd /tmp
           docker cp $(docker ps -qa):/var/cache/distfiles .
           docker cp $(docker ps -qa):/var/cache/binpkgs   .
           tar cf distfiles.tar distfiles/
@@ -44,5 +47,5 @@ jobs:
         with:
           name: binary-cache
           path: |
-            distfiles.tar
-            binpkgs.tar
+            /tmp/distfiles.tar
+            /tmp/binpkgs.tar
