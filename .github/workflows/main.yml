@@ -8,16 +8,15 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         continue-on-error: true
         with:
-          path: /tmp
           name: binary-cache
           workflow: main.yml
           workflow_conclusion: success
       - name: Fake .tar, if necessary
         run: |
-          cd /tmp
           mkdir -p distfiles binpkgs
           test -f distfiles.tar || tar -cf distfiles.tar distfiles
           test -f binpkgs.tar   || tar -cf binpkgs.tar   binpkgs
+          rm -rf distfiles binpkgs
           ls -l /tmp
 
       - uses: docker/setup-buildx-action@v1
