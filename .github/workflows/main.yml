@@ -14,9 +14,10 @@ jobs:
           workflow_conclusion: success
       - name: Fake .tar, if necessary
         run: |
-          mkdir -p binpkgs
+          mkdir -p binpkgs distfiles
+          test -f distfiles.tar || tar -cf distfiles.tar distfiles
           test -f binpkgs.tar   || tar -cf binpkgs.tar   binpkgs
-          md5sum binpkgs.tar
+          md5sum binpkgs.tar distfiles.tar
 
       - uses: docker/setup-buildx-action@v1
       - uses: docker/login-action@v1
@@ -39,11 +40,16 @@ jobs:
             | xargs -n1 echo \
             | while read -r file; do docker cp "$CONTAINER":"${file}" .; done
           tar cf binpkgs.tar binpkgs/
+          docker exec $CONTAINER /bin/sh -c 'echo /var/lib/buildkit/runc-overlayfs/snapshots/snapshots/*/fs/var/cache/distfiles/' \
+            | xargs -n1 echo \
+            | while read -r file; do docker cp "$CONTAINER":"${file}" .; done
+          tar cf distfiles.tar distfiles/
       - uses: actions/upload-artifact@v2
         with:
           name: binary-cache
           path: |
             binpkgs.tar
+            distfiles.tar
 
       - name: DEBUG SHELL
         uses: mxschmitt/action-tmate@v3
