@@ -20,8 +20,3 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gantoo:latest
-
-      - run: |
-          docker buildx build --cache-to=type=cache,id=base-binpkgs,target=/var/cache/binpkgs .
-          ls -l
-          ls -l */
