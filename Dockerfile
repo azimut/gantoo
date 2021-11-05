@@ -4,8 +4,8 @@ FROM gentoo/stage3:nomultilib-20211104
 ENV FEATURES='nodoc noinfo noman -ipc-sandbox -network-sandbox -pid-sandbox'
 ENV USE='static-libs'
 
-RUN --mount=type=bind,from=gentoo/portage:20211104,source=/var/db/repos/gentoo,target=/var/db/repos/gentoo,rw \
-    --mount=type=cache,target=/var/cache/binpkgs \
+RUN --mount=type=cache,target=/var/cache/binpkgs \
+    emerge-webrsync \
     emerge -bk app-portage/flaggie app-portage/gentoolkit app-portage/eix && \
     eix-update && \
     flaggie --strict --destructive-cleanup dev-lisp/sbcl +~amd64 && \
