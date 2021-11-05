@@ -15,4 +15,3 @@ RUN --mount=type=cache,target=/var/cache/binpkgs \
     flaggie --strict --destructive-cleanup media-gfx/imagemagick:0/6.9.11-60 -openmp -cxx -bzip2 -zlib && \
     flaggie --strict --destructive-cleanup media-libs/sdl2-image +png && \
     emerge -bk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image dev-lisp/sbcl dev-vcs/git
-
