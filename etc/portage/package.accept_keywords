@@ -1,0 +1,3 @@
+dev-lisp/asdf
+dev-lisp/sbcl
+dev-lisp/uiop

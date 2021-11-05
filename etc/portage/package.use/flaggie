@@ -1,0 +1,3 @@
+dev-vcs/git -perl
+media-gfx/imagemagick:0/6.9.11-60 -bzip2 -cxx -openmp -zlib
+media-libs/sdl2-image png
