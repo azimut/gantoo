@@ -1,4 +1,3 @@
-*.tar
 .dockerignore
 Dockerfile
 .git
