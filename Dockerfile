@@ -12,7 +12,7 @@ COPY etc/portage/package.accept_keywords /etc/portage/package.accept_keywords
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     --mount=type=cache,id=distfiles,target=/var/cache/distfiles \
     --mount=type=cache,id=base-binpkgs,target=/var/cache/binpkgs \
-    ls -l /var/cache/binpkgs && \
-    emerge -bk app-portage/flaggie app-portage/gentoolkit && \
+    ls -l /var/cache/binpkgs /var/cache/distfiles && \
+    emerge -bk app-portage/flaggie app-portage/gentoolkit app-portage/eix && \
     ls -l /var/cache/binpkgs && \
     eix-update
