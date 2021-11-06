@@ -6,8 +6,7 @@ FROM gentoo/stage3:nomultilib-20211104 as base
 ENV FEATURES='nodoc noinfo noman -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox' \
     USE='static-libs'
 
-ADD distfiles.tar /var/cache
-ADD binpkgs.tar   /var/cache
+ADD binpkgs.tar /var/cache
 
 COPY . /
 
