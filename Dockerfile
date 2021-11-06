@@ -4,7 +4,7 @@ FROM gentoo/portage:20211104 as portage
 FROM gentoo/stage3:nomultilib-20211104 as base
 
 ENV FEATURES='nodoc noinfo noman -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox' \
-    USE='static-libs'
+    USE='static-libs bindist'
 
 ADD binpkgs.tar /var/cache
 
