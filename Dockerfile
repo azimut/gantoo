@@ -11,10 +11,13 @@ ADD binpkgs.tar /var/cache
 COPY . /
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
-    ls -l /var/cache/binpkgs /etc/portage && \
-    emerge -qtbk app-portage/flaggie app-portage/gentoolkit app-portage/eix app-eselect/eselect-repository dev-vcs/git && \
+    emerge -qtbk app-eselect/eselect-repository dev-vcs/git && \
     mkdir /etc/portage/repos.conf && \
     eselect repository add azimut git https://github.com/azimut/overlay.git && \
-    emaint sync -r azimut && \
+    emaint sync -r azimut
+
+RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
+    ls -l /var/cache/binpkgs /etc/portage && \
+    emerge -qtbk app-portage/flaggie app-portage/gentoolkit app-portage/eix app-eselect/eselect-repository dev-vcs/git && \
     emerge -qtbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image dev-lisp/sbcl::azimut && \
     eix-update
