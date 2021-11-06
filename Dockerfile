@@ -11,6 +11,7 @@ ADD binpkgs.tar /var/cache
 COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
+    emerge -q1b --rebuilt-binaries=y media-libs/libsdl2 sys-libs/glibc && \
     emerge -qtbN --deep @world
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
