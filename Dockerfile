@@ -11,7 +11,7 @@ ADD binpkgs.tar /var/cache
 COPY . /
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
-    emerge -vNt --deep @world
+    emerge -qtbN --deep @world
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     emerge -qtbk app-eselect/eselect-repository dev-vcs/git && \
