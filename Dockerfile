@@ -19,6 +19,6 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs /etc/portage && \
-    emerge -qtbk app-portage/flaggie app-portage/gentoolkit app-portage/eix app-eselect/eselect-repository dev-vcs/git && \
-    emerge -qtbk media-libs/libsdl2 media-gfx/imagemagick media-libs/sdl2-image dev-lisp/sbcl && \
+    emerge -qtbk app-portage/flaggie app-portage/gentoolkit app-portage/eix app-editors/vim && \
+    emerge -qtbk media-libs/libsdl2 media-gfx/imagemagick media-libs/sdl2-image media-libs/sdl2-ttf dev-lisp/sbcl && \
     eix-update
