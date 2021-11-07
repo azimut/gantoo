@@ -9,13 +9,13 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         continue-on-error: true
         with:
-          name: binary-cache
+          name: binary-cache-20200905
           workflow: main.yml
           workflow_conclusion: success
       - name: Fake .tar, if necessary
         run: |
           mkdir -p binpkgs
-          test -f binpkgs.tar   || tar -cf binpkgs.tar   binpkgs
+          test -f binpkgs.tar || tar -cf binpkgs.tar   binpkgs
           md5sum binpkgs.tar
 
       - uses: docker/setup-buildx-action@v1
@@ -38,10 +38,11 @@ jobs:
           docker exec $CONTAINER /bin/sh -c 'echo /var/lib/buildkit/runc-overlayfs/snapshots/snapshots/*/fs/var/cache/binpkgs/' \
             | xargs -n1 echo \
             | while read -r file; do docker cp "$CONTAINER":"${file}" .; done
+          docker exec $CONTAINER /bin/sh -c 'rm -rf /var/lib/buildkit/runc-overlayfs/snapshots/snapshots/*/fs/var/cache/binpkgs/' \
           tar cf binpkgs.tar binpkgs/
       - uses: actions/upload-artifact@v2
         with:
-          name: binary-cache
+          name: binary-cache-20200905
           path: |
             binpkgs.tar
 

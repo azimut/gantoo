@@ -1,18 +1,14 @@
 # syntax = docker/dockerfile:1.3
 
-FROM gentoo/portage:20211104 as portage
-FROM gentoo/stage3:nomultilib-20211104 as base
+FROM gentoo/portage:20200905 as portage
+FROM gentoo/stage3:nomultilib-20200905 as base
 
 ENV FEATURES='nodoc noinfo noman -seccomp -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox' \
-    USE='static-libs bindist'
+    USE='bindist'
 
 ADD binpkgs.tar /var/cache
 
 COPY etc /etc/
-
-RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
-    emerge -q1b --rebuilt-binaries=y media-libs/libsdl2 sys-libs/glibc && \
-    emerge -qtbN --deep @world
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     emerge -qtbk app-eselect/eselect-repository dev-vcs/git && \
@@ -23,5 +19,5 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs /etc/portage && \
     emerge -qtbk app-portage/flaggie app-portage/gentoolkit app-portage/eix app-eselect/eselect-repository dev-vcs/git && \
-    emerge -qtbk media-libs/libsdl2 media-gfx/imagemagick:0/6.9.11-60 media-libs/sdl2-image dev-lisp/sbcl::azimut && \
+    emerge -qtbk media-libs/libsdl2 media-gfx/imagemagick media-libs/sdl2-image dev-lisp/sbcl && \
     eix-update
