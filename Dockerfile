@@ -4,6 +4,7 @@ FROM gentoo/portage:20200905 as portage
 FROM gentoo/stage3:nomultilib-20200905 as base
 
 ENV FEATURES='nodoc noinfo noman -seccomp -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox' \
+    VIDEO_CARDS='' \
     USE='bindist'
 
 ADD binpkgs.tar /var/cache

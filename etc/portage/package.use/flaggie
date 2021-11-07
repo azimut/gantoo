@@ -1,4 +1,6 @@
+dev-lisp/sbcl source
 dev-vcs/git -perl
 media-gfx/imagemagick -bzip2 -cxx -openmp -zlib
+media-libs/mesa -classic -gallium
 media-libs/sdl2-image png
-dev-lisp/sbcl source
+
