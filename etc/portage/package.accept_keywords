@@ -1,3 +1,4 @@
 dev-lisp/asdf
+dev-lisp/ecls
 dev-lisp/sbcl
 dev-lisp/uiop
