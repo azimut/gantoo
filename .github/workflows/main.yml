@@ -7,6 +7,7 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - run: mkdir -p /tmp/cache
       - name: Cache /binpkgs
         uses: gerbal/always-cache@v1.0.3
         env:
