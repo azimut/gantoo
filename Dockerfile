@@ -13,5 +13,5 @@ COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs && \
-    emerge -tbN --deep @world
+    emerge -qtbN --deep @world
 
