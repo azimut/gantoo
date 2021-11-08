@@ -4,8 +4,8 @@ FROM gentoo/portage:20211108 as portage
 FROM gentoo/stage3:musl-20211108 as base
 
 ENV FEATURES='nodoc noinfo noman -seccomp -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox' \
-    VIDEO_CARDS='' \
-    USE='static-libs bindist'
+    USE='static-libs bindist' \
+    VIDEO_CARDS=''
 
 ADD binpkgs.tar /var/cache
 
@@ -13,10 +13,14 @@ COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs && \
-    emerge -qtbN --deep @world
+    emerge -qtbN --deep @world && \
+    emerge -qtbk app-eselect/eselect-repository dev-vcs/git app-portage/flaggie app-portage/gentoolkit app-portage/eix app-editors/vim && \
+    emerge -C app-editors/nano && \
+    mkdir /etc/portage/repos.conf && \
+    eix-update && \
+    eselect repository add azimut git https://github.com/azimut/overlay.git
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs && \
-    emerge -qtbk dev-lisp/ecls && \
-    emerge -qtbk dev-lisp/sbcl
-
+    emaint sync -r azimut && \
+    emerge -qtbk =dev-lisp/sbcl-2.1.9::azimut
