@@ -17,5 +17,6 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs && \
+    emerge -qtbk dev-lisp/ecls && \
     emerge -qtbk dev-lisp/sbcl
 
