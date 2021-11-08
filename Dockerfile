@@ -22,5 +22,6 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs && \
+    sed -i -e 's#^ID.*#ID=alpine#g' /etc/os-release && \
     emaint sync -r azimut && \
     emerge -qtbk =dev-lisp/sbcl-2.1.9::azimut
