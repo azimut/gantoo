@@ -12,5 +12,7 @@ ADD binpkgs.tar /var/cache
 COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
-    emerge -tbN --deep @world
+    ls -l /var/cache/binpkgs && \
+    emerge -tbq dev-vcs/git
+
 
