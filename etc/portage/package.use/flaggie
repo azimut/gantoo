@@ -1,4 +1,4 @@
-dev-lisp/sbcl source
+dev-lisp/sbcl source daewok
 dev-vcs/git -perl
 media-gfx/imagemagick -bzip2 -cxx -openmp -zlib
 media-libs/libglvnd X
