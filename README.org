@@ -1,0 +1,14 @@
+* Gantoo
+
+Gentoo musl based container image to statically build things. Common Lisp oriented.
+
+** Why?
+   - Alpine sometimes has missing static libraries (.a)
+   - Alpine sometimes links their libraries a little too much (ex: imagemagick with X11)
+   - Alpine sometimes has some packages missing (sometimes for a good reason but...)
+** Dev Notes
+   - Portage not included in the image. You will need to *emerge-webrsync* (might be with the snapshot date of the build, see Dockerfile)
+   - VIDEO_CARDS= set to empty to skip driver compilation
+   - using an actions/cache fork to save cache (binpkgs) even on failure
+   - Faked ID=alpine on /etc/os-release to make github action runner happy and use a musl based "node" image
+
