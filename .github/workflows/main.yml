@@ -9,7 +9,7 @@ jobs:
 
       - run: mkdir -p /tmp/cache
       - name: Cache /binpkgs
-        uses: gerbal/always-cache@v1.0.3
+        uses: actions/cache@v2
         env:
           cache-name: cache-binpkgs-musl-20211108
         with:
