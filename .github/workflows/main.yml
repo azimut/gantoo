@@ -9,7 +9,7 @@ jobs:
 
       - run: mkdir -p /tmp/cache
       - name: Cache /binpkgs
-        uses: actions/cache@v2
+        uses: pat-s/always-upload-cache@main
         env:
           cache-name: cache-binpkgs-musl-20211108
         with:
