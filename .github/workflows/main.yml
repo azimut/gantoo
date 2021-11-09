@@ -31,15 +31,14 @@ jobs:
           buildkitd-flags: --debug
       - uses: docker/login-action@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: docker/build-push-action@v2
         id: docker_build
         with:
           context: .
           push: true
-          tags: ghcr.io/azimut/gantoo/musl:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gantoo:musl
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
