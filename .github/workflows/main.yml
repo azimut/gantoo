@@ -48,9 +48,10 @@ jobs:
             | xargs -n1 echo \
             | while read -r file; do docker cp "$CONTAINER":"${file}" .; done
           docker exec $CONTAINER /bin/sh -c 'rm -rf /var/lib/buildkit/runc-overlayfs/snapshots/snapshots/*/fs/var/cache/binpkgs/'
-          rm -vf binpkgs.tar
+          rm -vf binpkgs.tar /tmp/cache/binpkgs.tar
           tar cf binpkgs.tar binpkgs/
           md5sum binpkgs.tar
+          tar tf binpkgs.tar
           mv -v binpkgs.tar /tmp/cache
 
       - name: DEBUG SHELL
