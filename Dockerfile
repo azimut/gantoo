@@ -25,4 +25,4 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs && \
     emaint sync -r azimut && \
-    emerge -qtbk =dev-lisp/sbcl-2.1.9::azimut
+    emerge -qtbk =dev-lisp/sbcl-2.1.9-r1::azimut
