@@ -21,7 +21,8 @@ jobs:
         run: |
           cd /tmp/cache
           mkdir -p binpkgs
-          test -f binpkgs.tar || tar -cf binpkgs.tar binpkgs
+          test -f binpkgs.tar && tar tf binpkgs.tar
+          test -f binpkgs.tar || tar cf binpkgs.tar binpkgs
           md5sum binpkgs.tar
           mv -v binpkgs.tar "$GITHUB_WORKSPACE"/
 
