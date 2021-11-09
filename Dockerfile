@@ -13,16 +13,16 @@ COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache /var/cache/binpkgs && \
+    emerge -qtbk --newuse --deep @world && \
     emerge -qtbk app-eselect/eselect-repository dev-vcs/git app-portage/flaggie app-portage/gentoolkit app-portage/eix app-editors/vim && \
-    ls -l /var/cache /var/cache/binpkgs
-#    emerge -qtbk --newuse --deep @world && \
-#     emerge -C app-editors/nano && \
-#     mkdir /etc/portage/repos.conf && \
-#     eix-update && \
-#     eselect repository add azimut git https://github.com/azimut/overlay.git
+    ls -l /var/cache /var/cache/binpkgs && \
+    emerge -C app-editors/nano && \
+    mkdir /etc/portage/repos.conf && \
+    eix-update && \
+    eselect repository add azimut git https://github.com/azimut/overlay.git
 
-# RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
-#     ls -l /var/cache/binpkgs && \
-#     sed -i -e 's#^ID.*#ID=alpine#g' /etc/os-release && \
-#     emaint sync -r azimut && \
-#     emerge -qtbk =dev-lisp/sbcl-2.1.9::azimut
+RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
+    ls -l /var/cache /var/cache/binpkgs && \
+    sed -i -e 's#^ID.*#ID=alpine#g' /etc/os-release && \
+    emaint sync -r azimut && \
+    emerge -qtbk =dev-lisp/sbcl-2.1.9::azimut
