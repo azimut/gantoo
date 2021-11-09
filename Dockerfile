@@ -12,6 +12,7 @@ ADD binpkgs.tar /var/cache
 COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
+    set -x && \
     ls -l /var/cache /var/cache/binpkgs && \
     emerge -qtbk --newuse --deep @world && \
     emerge -qtbk app-eselect/eselect-repository dev-vcs/git app-portage/flaggie app-portage/gentoolkit app-portage/eix app-editors/vim && \
@@ -19,6 +20,7 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
     emerge -C app-editors/nano && \
     mkdir /etc/portage/repos.conf && \
     eix-update && \
+    echo REMOTE_LIST_URI=https://api.gentoo.org/overlays/repositories.xml >> /etc/eselect/repository.conf && \
     eselect repository add azimut git https://github.com/azimut/overlay.git && \
     sed -i -e 's#^ID.*#ID=alpine#g' /etc/os-release
 
