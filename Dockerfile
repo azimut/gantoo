@@ -13,7 +13,7 @@ COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache /var/cache/binpkgs && \
-    emerge -qtbk app-eselect/eselect-repository app-portage/flaggie && \
+    emerge -qtbk app-eselect/eselect-repository app-portage/flaggie dev-vcs/git && \
     ls -l /var/cache /var/cache/binpkgs
 #    emerge -qtbk --newuse --deep @world && \
 #     emerge -qtbk app-eselect/eselect-repository dev-vcs/git app-portage/flaggie app-portage/gentoolkit app-portage/eix app-editors/vim && \
