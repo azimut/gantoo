@@ -1,14 +1,18 @@
 * Gantoo
+Gentoo musl based container image to statically link things. Common Lisp oriented.
 
-Gentoo musl based container image to statically build things. Common Lisp oriented.
+Pushed to [[https://hub.docker.com/r/molochwalker/gantoo/tags][Docker Hub]]
 
 ** Why?
    - Alpine sometimes has missing static libraries (.a)
    - Alpine sometimes links their libraries a little too much (ex: imagemagick with X11)
    - Alpine sometimes has some packages missing (sometimes for a good reason but...)
+   - If possible I don't want to write custom build scripts for each new library I use
 ** Dev Notes
    - Portage not included in the image. You will need to *emerge-webrsync* (might be with the snapshot date of the build, see Dockerfile)
    - VIDEO_CARDS= set to empty to skip driver compilation
    - using an actions/cache fork to save cache (binpkgs) even on failure
    - Faked ID=alpine on /etc/os-release to make github action runner happy and use a musl based "node" image
-
+** See also
+   - Ubuntu/musl/Rust container https://github.com/emk/rust-musl-builder
+   - Nix/musl/Haskell https://github.com/nh2/static-haskell-nix
