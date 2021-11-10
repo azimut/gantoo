@@ -43,6 +43,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Extract Build Cache
+        continue-on-error: true # NOTE: if layer cache hits, no /fs/ would exist
         if: always()
         run: |
           CONTAINER=$(docker ps -qa)
