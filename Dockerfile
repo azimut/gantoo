@@ -14,8 +14,8 @@ COPY etc /etc/
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     set -x && \
     ls -l /var/cache /var/cache/binpkgs && \
-    emerge -qtbk --newuse --deep @world && \
-    emerge -qtbk app-eselect/eselect-repository dev-vcs/git app-portage/flaggie app-portage/gentoolkit app-portage/eix app-editors/vim && \
+    emerge --quiet-build=y -tbk --newuse --deep @world && \
+    emerge --quiet-build=y -tbk app-eselect/eselect-repository dev-vcs/git app-portage/flaggie app-portage/gentoolkit app-portage/eix app-editors/vim && \
     ls -l /var/cache /var/cache/binpkgs && \
     emerge -C app-editors/nano && \
     mkdir /etc/portage/repos.conf && \
@@ -27,4 +27,4 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     ls -l /var/cache/binpkgs && \
     emaint sync -r azimut && \
-    emerge -qtbk =dev-lisp/sbcl-2.1.9-r1::azimut
+    emerge --quiet-build=y -tbk =dev-lisp/sbcl-2.1.9-r1::azimut
