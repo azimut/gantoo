@@ -20,7 +20,7 @@ jobs:
         with:
           path: /tmp/cache
           key: "${{ env.cache-name }}-${{ matrix.platform }}-${{ github.sha }}"
-          restore-keys: "${{ env.cache-name }}"
+          restore-keys: "${{ env.cache-name }}-${{ matrix.platform }}"
 
       - name: Fake .tar, if necessary
         run: |
