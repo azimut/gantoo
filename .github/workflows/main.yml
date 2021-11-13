@@ -45,6 +45,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: docker/build-push-action@v2
         id: docker_build
+        timeout-minutes: 720
         with:
           platforms: ${{ matrix.platform }}
           context: .
@@ -71,3 +72,4 @@ jobs:
       - name: DEBUG SHELL
         uses: mxschmitt/action-tmate@v3
         if: ${{ failure() }}
+        timeout-minutes: 15
