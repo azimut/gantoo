@@ -12,6 +12,7 @@ jobs:
         platform:
           - linux/amd64
           - linux/386
+
     steps:
 
       - uses: actions/checkout@v2
