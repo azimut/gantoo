@@ -8,6 +8,7 @@ ENV FEATURES='nodoc noinfo noman -seccomp -ipc-sandbox -mount-sandbox -network-s
     VIDEO_CARDS=''
 
 ADD binpkgs.tar /var/cache
+
 COPY etc /etc/
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
