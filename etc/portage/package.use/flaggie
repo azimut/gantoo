@@ -1,7 +1,8 @@
-dev-lisp/sbcl source daewok
-dev-vcs/git -perl
-media-gfx/imagemagick -bzip2 -cxx -openmp -zlib
-media-libs/libglvnd X
-media-libs/mesa -classic -gallium
-media-libs/sdl2-image png
-
+dev-lisp/sbcl          source daewok
+dev-vcs/git            -perl
+media-gfx/imagemagick  -bzip2 -cxx -openmp -zlib
+media-libs/libglvnd    X
+media-libs/mesa        -classic -gallium
+media-libs/openal      -pipewire -sndio
+media-libs/sdl2-image  png
+media-libs/assimp      -samples
