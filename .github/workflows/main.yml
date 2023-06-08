@@ -15,7 +15,7 @@ jobs:
       - name: Cache /binpkgs
         uses: pat-s/always-upload-cache@main
         env:
-          cache-name: cache-binpkgs-musl-20211108
+          cache-name: cache-binpkgs-musl-20230605
         with:
           path: /tmp/cache
           key: "${{ env.cache-name }}-${{ github.sha }}"

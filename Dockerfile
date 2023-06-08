@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1.3
 
-FROM gentoo/portage:20211108 as portage
-FROM gentoo/stage3:musl-20211108 as base
+FROM gentoo/portage:20230605 as portage
+FROM gentoo/stage3:musl-20230605 as base
 
 ENV FEATURES='nodoc noinfo noman -seccomp -ipc-sandbox -mount-sandbox -network-sandbox -pid-sandbox -sandbox -usersandbox' \
     USE='static-libs bindist' \
