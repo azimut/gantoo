@@ -6,6 +6,11 @@ on:
       - 'README.org'
 jobs:
   build:
+
+    strategy:
+      matrix:
+        libc: [ musl, glibc ]
+
     runs-on: ubuntu-latest
     steps:
 
@@ -15,7 +20,7 @@ jobs:
       - name: Cache /binpkgs
         uses: pat-s/always-upload-cache@main
         env:
-          cache-name: cache-binpkgs-musl-20230605
+          cache-name: cache-binpkgs-${{ matrix.libc }}-20230605
         with:
           path: /tmp/cache
           key: "${{ env.cache-name }}-${{ github.sha }}"
@@ -38,9 +43,10 @@ jobs:
       - uses: docker/build-push-action@v2
         id: docker_build
         with:
+          file: ./Dockerfile.${{ matrix.libc }}
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gantoo:musl
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gantoo:${{ matrix.libc }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
