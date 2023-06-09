@@ -65,12 +65,6 @@ jobs:
           tar tf binpkgs.tar
           mv -v binpkgs.tar /tmp/cache
 
-      - uses: peter-evans/dockerhub-description@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          readme-filepath: README.org
-
       - name: DEBUG SHELL
         uses: mxschmitt/action-tmate@v3
         if: ${{ failure() }}
