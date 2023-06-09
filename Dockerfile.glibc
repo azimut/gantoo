@@ -27,4 +27,5 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
     set -x && \
     ls -l /var/cache/binpkgs && \
     emaint sync -r azimut && \
-    emerge --quiet-build=y -j2 -l2 -bk dev-lisp/sbcl
+    emerge --quiet-build=y -j2 -l2 -bk --newuse dev-libs/zlib && \
+    emerge --quiet-build=y -j2 -l2 -bk dev-lisp/sbcl media-libs/mesa dev-libs/zlib
