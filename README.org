@@ -1,11 +1,12 @@
 * Gantoo
-Gentoo musl based container image to statically link things. Common Lisp oriented.
+
+A Gentoo glibc/musl based container image to dynamically/statically build Common Lisp applications.
 
 Pushed to [[https://hub.docker.com/r/molochwalker/gantoo/tags][Docker Hub]]
 
 ** Why?
    - Alpine sometimes has missing static libraries (.a)
-   - Alpine sometimes links their libraries a little too much (ex: imagemagick with X11)
+   - Alpine sometimes dynamically link their libraries a little too much (ex: imagemagick with X11)
    - Alpine sometimes has some packages missing (sometimes for a good reason but...)
    - If possible I don't want to write custom build scripts for each new library I use
 ** Dev Notes
