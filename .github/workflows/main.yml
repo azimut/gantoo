@@ -20,7 +20,7 @@ jobs:
       - name: Cache /binpkgs
         uses: pat-s/always-upload-cache@main
         env:
-          cache-name: cache-binpkgs-${{ matrix.libc }}-20230605
+          cache-name: cache-binpkgs-${{ matrix.libc }}-20230609
         with:
           path: /tmp/cache
           key: "${{ env.cache-name }}-${{ github.sha }}"
