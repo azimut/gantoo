@@ -6,3 +6,4 @@ media-libs/mesa        -classic -gallium
 media-libs/openal      -pipewire -sndio
 media-libs/sdl2-image  png
 media-libs/assimp      -samples
+sys-libs/zlib          minizip
