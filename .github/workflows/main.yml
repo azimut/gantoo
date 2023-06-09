@@ -69,7 +69,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          readme-filepath: ./README.org
+          readme-filepath: README.org
 
       - name: DEBUG SHELL
         uses: mxschmitt/action-tmate@v3
