@@ -21,8 +21,7 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
     mkdir /etc/portage/repos.conf && \
     eix-update && \
     echo REMOTE_LIST_URI=https://api.gentoo.org/overlays/repositories.xml >> /etc/eselect/repository.conf && \
-    eselect repository add azimut git https://github.com/azimut/overlay.git && \
-    sed -i -e 's#^ID.*#ID=alpine#g' /etc/os-release
+    eselect repository add azimut git https://github.com/azimut/overlay.git
 
 RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
     set -x && \
