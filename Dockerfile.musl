@@ -11,7 +11,7 @@ ADD binpkgs.tar /var/cache
 
 COPY etc /etc/
 
-RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
+RUN --mount=source=/var/db/repos/gentoo,target=/var/db/repos/gentoo,from=portage \
     set -x && \
     ls -l /var/cache/binpkgs && \
     emerge --quiet-build=y -j2 -l2 -bk --newuse --deep @world && \
@@ -24,7 +24,7 @@ RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,fr
     eselect repository add azimut git https://github.com/azimut/overlay.git && \
     sed -i -e 's#^ID.*#ID=alpine#g' /etc/os-release
 
-RUN --mount=type=bind,target=/var/db/repos/gentoo,source=/var/db/repos/gentoo,from=portage \
+RUN --mount=source=/var/db/repos/gentoo,target=/var/db/repos/gentoo,from=portage \
     set -x && \
     ls -l /var/cache/binpkgs && \
     emaint sync -r azimut && \
