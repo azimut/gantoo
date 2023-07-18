@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        libc: [ glibc ]
+        libc: [ glibc, musl ]
 
     runs-on: ubuntu-latest
     steps:
